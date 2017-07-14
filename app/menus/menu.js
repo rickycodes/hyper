@@ -17,6 +17,8 @@ const appVersion = app.getVersion();
 
 module.exports = (createWindow, updatePlugins, getLoadedPluginVersions) => {
   const commands = getKeymaps().commands;
+  // expose commands
+  app.commands = commands;
   const showAbout = () => {
     const loadedPlugins = getLoadedPluginVersions();
     const pluginList = loadedPlugins.length === 0 ?
