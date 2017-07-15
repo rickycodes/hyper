@@ -25,7 +25,7 @@ module.exports = (createWindow, updatePlugins, getLoadedPluginVersions) => {
   };
 
   // expose to plugins
-  app.contextMenuTemplate = contextMenuTemplate;
+  app.contextMenuTemplate = contextMenuTemplate();
 
   const showAbout = () => {
     const loadedPlugins = getLoadedPluginVersions();
