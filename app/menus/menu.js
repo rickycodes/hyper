@@ -23,7 +23,7 @@ module.exports = (createWindow, updatePlugins, getLoadedPluginVersions) => {
     .concat(shellMenu(commands, createWindow).submenu);
   };
 
-  // expose contextMenuTemplate
+  // expose to plugins
   app.contextMenuTemplate = contextMenuTemplate();
 
   const showAbout = () => {
