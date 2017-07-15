@@ -19,8 +19,9 @@ module.exports = (createWindow, updatePlugins, getLoadedPluginVersions) => {
   const commands = getKeymaps().commands;
 
   const contextMenuTemplate = () => {
+    const seperator = {type: 'separator'};
     return editMenu(commands).submenu
-    .concat(shellMenu(commands, createWindow).submenu);
+    .concat(seperator, shellMenu(commands, createWindow).submenu);
   };
 
   // expose to plugins
