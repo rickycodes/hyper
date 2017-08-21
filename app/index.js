@@ -50,6 +50,9 @@ const isDev = require('electron-is-dev');
 const AutoUpdater = require('./auto-updater');
 const toElectronBackgroundColor = require('./utils/to-electron-background-color');
 const AppMenu = require('./menus/menu');
+const editMenu = require('./menus/menus/edit');
+const shellMenu = require('./menus/menus/shell');
+const {getKeymaps} = require('./config');
 const createRPC = require('./rpc');
 const notify = require('./notify');
 const fetchNotifications = require('./notifications');
@@ -291,10 +294,9 @@ app.on('ready', () => installDevExtensions(isDev).then(() => {
     });
 
     rpc.on('open context menu', () => {
-      const menus = AppMenu()
-        .filter(menu => menu.label === 'Edit' || menu.label === 'Shell')
-        .map(menu => menu.submenu);
-      const contextMenuTemplate = menus[1].concat({type: 'separator'}, menus[0]);
+      const commands = getKeymaps().commands;
+      const contextMenuTemplate = editMenu(commands).submenu
+        .concat({type: 'separator'}, shellMenu(commands).submenu);
       const contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
       setTimeout(() => contextMenu.popup(), 100);
     });
