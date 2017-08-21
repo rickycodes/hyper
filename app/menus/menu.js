@@ -17,15 +17,6 @@ const appVersion = app.getVersion();
 
 module.exports = (createWindow, updatePlugins, getLoadedPluginVersions) => {
   const commands = getKeymaps().commands;
-
-  const contextMenuTemplate = () => {
-    return editMenu(commands).submenu
-    .concat({type: 'separator'}, shellMenu(commands, createWindow).submenu);
-  };
-
-  // expose to plugins
-  app.contextMenuTemplate = contextMenuTemplate();
-
   const showAbout = () => {
     const loadedPlugins = getLoadedPluginVersions();
     const pluginList = loadedPlugins.length === 0 ?

@@ -290,6 +290,15 @@ app.on('ready', () => installDevExtensions(isDev).then(() => {
       Menu.getApplicationMenu().popup(Math.ceil(x), Math.ceil(y));
     });
 
+    rpc.on('open context menu', () => {
+      const menus = AppMenu()
+        .filter(menu => menu.label === 'Edit' || menu.label === 'Shell')
+        .map(menu => menu.submenu);
+      const contextMenuTemplate = menus[1].concat({type: 'separator'}, menus[0]);
+      const contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
+      setTimeout(() => contextMenu.popup(), 100);
+    });
+
     rpc.on('minimize', () => {
       win.minimize();
     });
