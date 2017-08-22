@@ -296,7 +296,7 @@ app.on('ready', () => installDevExtensions(isDev).then(() => {
     rpc.on('open context menu', () => {
       const commands = getKeymaps().commands;
       const contextMenuTemplate = editMenu(commands).submenu
-        .concat({type: 'separator'}, shellMenu(commands).submenu);
+        .concat({type: 'separator'}, shellMenu(commands, createWindow).submenu);
       const contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
       setTimeout(() => contextMenu.popup(), 100);
     });
